@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Professional Dynamic CV Form</title>
+<style>
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 { color:#0056b3; }
+
+input[type="text"], input[type="date"], textarea {
+    width: 100%;
+    padding: 6px;
+    margin: 4px 0 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 13px;
+    box-sizing: border-box;
+}
+
+textarea { resize: vertical; }
+
+label { font-weight: bold; font-size: 13px; }
+
+.section {
+    background: #fff;
+    padding: 15px 20px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+    width: 800px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    border-left: 5px solid #0056b3;
+}
+
+.section-title {
+    font-weight: bold;
+    color: #0056b3;
+    margin-bottom: 12px;
+    font-size: 14px;
+}
+
+.cv-container {
+    width: 210mm;
+    min-height: 297mm;
+    background-color: white;
+    border: 3px solid #333;
+    padding: 25px;
+    box-shadow: 0 0 12px rgba(0,0,0,0.15);
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.cv-title {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 900;
+    color: #0056b3;
+    padding-bottom: 8px;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #0056b3;
+}
+
+.cv-section {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 12px;
+    margin-bottom: 12px;
+}
+
+button {
+    padding: 10px 22px;
+    font-size: 14px;
+    background: #0056b3;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+</style>
+</head>
+<body>
+
+<h1>Professional Dynamic CV Form</h1>
+
+<!-- Personal Details Form -->
+<div class="section">
+    <div class="section-title">Personal Details</div>
+    <label>Full Name:</label><input type="text" id="fullName" oninput="updateCV()">
+    <label>Father's Name:</label><input type="text" id="fatherName" oninput="updateCV()">
+    <label>Nationality:</label><input type="text" id="nationality" oninput="updateCV()">
+    <label>Gender:</label><input type="text" id="gender" oninput="updateCV()">
+    <label>Date of Birth:</label><input type="date" id="dob" oninput="updateCV()">
+    <label>Religion:</label><input type="text" id="religion" oninput="updateCV()">
+    <label>Marital Status:</label><input type="text" id="marital" oninput="updateCV()">
+    <label>Languages Known:</label><input type="text" id="language" oninput="updateCV()">
+    <label>Mobile No:</label><input type="text" id="mobile" oninput="updateCV()">
+    <label>Post Applied For:</label><input type="text" id="post" oninput="updateCV()">
+</div>
+
+<!-- Passport Details Form -->
+<div class="section">
+    <div class="section-title">Passport Details</div>
+    <label>Passport No:</label><input type="text" id="passport" oninput="updateCV()">
+    <label>Date of Issue:</label><input type="date" id="issueDate" oninput="updateCV()">
+    <label>Expiry Date:</label><input type="date" id="expiryDate" oninput="updateCV()">
+</div>
+
+<!-- Civil ID Form -->
+<div class="section">
+    <div class="section-title">Civil ID Details</div>
+    <label>Civil ID No:</label><input type="text" id="civilId" oninput="updateCV()">
+    <label>Expiry Date:</label><input type="date" id="civilExpiry" oninput="updateCV()">
+    <label>Visa Status:</label><input type="text" id="visaStatus" oninput="updateCV()">
+</div>
+
+<!-- Education Form -->
+<div class="section">
+    <div class="section-title">Education Qualification</div>
+    <label>Qualification:</label><input type="text" id="education" oninput="updateCV()">
+    <label>Board:</label><input type="text" id="board" oninput="updateCV()">
+    <label>Year of Passing:</label><input type="text" id="passYear" oninput="updateCV()">
+</div>
+
+<!-- Job Experience Form -->
+<div class="section">
+    <div class="section-title">Job Experience</div>
+    <label>Job 1 Title & Company:</label><input type="text" id="job1" oninput="updateCV()">
+    <label>Job 1 Responsibilities:</label><textarea id="resp1" rows="3" oninput="updateCV()"></textarea>
+    <label>Job 2 Title & Company:</label><input type="text" id="job2" oninput="updateCV()">
+    <label>Job 2 Responsibilities:</label><textarea id="resp2" rows="3" oninput="updateCV()"></textarea>
+</div>
+
+<!-- Declaration Form -->
+<div class="section">
+    <div class="section-title">Declaration</div>
+    <textarea id="declaration" rows="3" oninput="updateCV()"></textarea>
+</div>
+
+<button onclick="printCV()">Download / Print CV</button>
+
+<!-- CV Output -->
+<div class="cv-container" id="cv">
+    <div class="cv-title">CURRICULUM VITAE</div>
+
+    <div class="cv-section">
+        <h2 id="cvFullName"></h2>
+        <p>Father's Name: <span id="cvFatherName"></span></p>
+        <p>Nationality: <span id="cvNationality"></span></p>
+        <p>Gender: <span id="cvGender"></span></p>
+        <p>Date of Birth: <span id="cvDOB"></span></p>
+        <p>Religion: <span id="cvReligion"></span></p>
+        <p>Marital Status: <span id="cvMarital"></span></p>
+        <p>Languages Known: <span id="cvLanguage"></span></p>
+        <p>Mobile No.: <span id="cvMobile"></span></p>
+        <p>Post Applied For: <span id="cvPost"></span></p>
+    </div>
+
+    <div class="cv-section">
+        <h3>Passport Details</h3>
+        <p>Passport No.: <span id="cvPassport"></span></p>
+        <p>Date of Issue: <span id="cvIssue"></span></p>
+        <p>Expiry Date: <span id="cvExpiry"></span></p>
+    </div>
+
+    <div class="cv-section">
+        <h3>Civil ID Details</h3>
+        <p>Civil ID No.: <span id="cvCivilId"></span></p>
+        <p>Expiry Date: <span id="cvCivilExpiry"></span></p>
+        <p>Visa Status: <span id="cvVisaStatus"></span></p>
+    </div>
+
+    <div class="cv-section">
+        <h3>Education Qualification</h3>
+        <p>Qualification: <span id="cvEducation"></span></p>
+        <p>Board: <span id="cvBoard"></span></p>
+        <p>Year of Passing: <span id="cvPassYear"></span></p>
+    </div>
+
+    <div class="cv-section">
+        <h3>Job Experience</h3>
+        <p>Job 1: <span id="cvJob1"></span></p>
+        <p>Responsibilities: <span id="cvResp1"></span></p>
+        <p>Job 2: <span id="cvJob2"></span></p>
+        <p>Responsibilities: <span id="cvResp2"></span></p>
+    </div>
+
+    <div class="cv-section">
+        <h3>Declaration</h3>
+        <p><span id="cvDeclaration"></span></p>
+    </div>
+</div>
+
+<script>
+function updateCV() {
+    document.getElementById('cvFullName').innerText = document.getElementById('fullName').value;
+    document.getElementById('cvFatherName').innerText = document.getElementById('fatherName').value;
+    document.getElementById('cvNationality').innerText = document.getElementById('nationality').value;
+    document.getElementById('cvGender').innerText = document.getElementById('gender').value;
+    document.getElementById('cvDOB').innerText = document.getElementById('dob').value;
+    document.getElementById('cvReligion').innerText = document.getElementById('religion').value;
+    document.getElementById('cvMarital').innerText = document.getElementById('marital').value;
+    document.getElementById('cvLanguage').innerText = document.getElementById('language').value;
+    document.getElementById('cvMobile').innerText = document.getElementById('mobile').value;
+    document.getElementById('cvPost').innerText = document.getElementById('post').value;
+
+    document.getElementById('cvPassport').innerText = document.getElementById('passport').value;
+    document.getElementById('cvIssue').innerText = document.getElementById('issueDate').value;
+    document.getElementById('cvExpiry').innerText = document.getElementById('expiryDate').value;
+
+    document.getElementById('cvCivilId').innerText = document.getElementById('civilId').value;
+    document.getElementById('cvCivilExpiry').innerText = document.getElementById('civilExpiry').value;
+    document.getElementById('cvVisaStatus').innerText = document.getElementById('visaStatus').value;
+
+    document.getElementById('cvEducation').innerText = document.getElementById('education').value;
+    document.getElementById('cvBoard').innerText = document.getElementById('board').value;
+    document.getElementById('cvPassYear').innerText = document.getElementById('passYear').value;
+
+    document.getElementById('cvJob1').innerText = document.getElementById('job1').value;
+    document.getElementById('cvResp1').innerText = document.getElementById('resp1').value;
+    document.getElementById('cvJob2').innerText = document.getElementById('job2').value;
+    document.getElementById('cvResp2').innerText = document.getElementById('resp2').value;
+
+    document.getElementById('cvDeclaration').innerText = document.getElementById('declaration').value;
+}
+
+function printCV() {
+    let cvContent = document.getElementById("cv").innerHTML;
+    let printWindow = window.open("", "", "height=900,width=900");
+    printWindow.document.write("<html><head><title>Print CV</title>");
+    printWindow.document.write("<style>");
+    printWindow.document.write("body{font-family:Arial; font-size:12px; padding:20px;}");
+    printWindow.document.write(".cv-container{width:210mm; min-height:297mm; border:1px solid #333; padding:20px;}");
+    printWindow.document.write(".cv-section{border:1px solid #ccc; padding:10px; margin-bottom:10px; border-radius:5px;}");
+    printWindow.document.write(".cv-title{text-align:center; font-size:20px; font-weight:900; color:#0056b3; padding-bottom:8px; margin-bottom:20px; border-bottom:2px solid #0056b3;}");
+    printWindow.document.write("</style></head><body>");
+    printWindow.document.write('<div class="cv-container">' + cvContent + '</div>');
+    printWindow.document.write("</body></html>");
+    printWindow.document.close();
+    printWindow.print();
+}
+</script>
+
+</body>
+</html>
